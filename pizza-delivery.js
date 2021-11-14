@@ -24,17 +24,37 @@
 //* Approach
 //? Object with conditions, counter for when conditions are met?
 //Starting point is 0 -> delivery
-//^ -> 1
-//v -> -1
-//> -> 1
-//< -> -1
+
 
 //? if previous condition is === opposite of current condition?
 //? But what if third condition brings them back to same house?
 
 //read input
 //mutate to array
-//init delivery counter 
-//for loop 
-//if delivered, change input to X?
-// this is where my brain freezes
+//init delivery counter
+//init house counter 
+//for loop over input
+//if else statement
+//if ^ +1 to house counter & +1 to delivery counter
+//if v -1 to house counter +1 to delivery
+//if > +1 to house counter +1 to delivery
+//if < -1 to house counter +1 to delivery
+//if house counter = 0 do not add to house
+
+
+const fs = require('fs')
+const input = fs.readFileSync('input.txt', 'utf-8')
+
+function part1 (directions){
+  let directionsArr = directions.split('')
+  let delivery = 0
+  let houses = 0
+  for (let i = 0; i < directionsArr.length; i++) {
+    const arrow = directionsArr[i];
+    console.log(arrow)
+  }
+  
+}
+
+part1(input)
+
