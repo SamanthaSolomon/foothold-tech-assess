@@ -45,16 +45,25 @@
 const fs = require('fs')
 const input = fs.readFileSync('input.txt', 'utf-8')
 
+const test1 = '^>v<'
+
 function part1 (directions){
-  let directionsArr = directions.split('')
+  let arrow = directions.split('')
   let delivery = 0
   let houses = 0
-  for (let i = 0; i < directionsArr.length; i++) {
-    const arrow = directionsArr[i];
-    console.log(arrow)
+  for (let i = 0; i < arrow.length; i++) {
+    if (arrow[i] === '^'){
+      console.log('north')
+    } else if (arrow[i] === 'v'){
+      console.log('south')
+    } else if (arrow[i] === '>'){
+      console.log('east')
+    } else if (arrow[i] === '<'){
+      console.log('west')
+    }
   }
-  
 }
 
-part1(input)
+part1(test1)
+//part1(input)
 
