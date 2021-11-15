@@ -7,9 +7,7 @@
 
 // - `^>v<` delivers pizzas to four houses in a square; the house at the starting/ending location ends up with two pizzas.
 
-//d > d
-//^   v
-//2d< d
+
 
 // - `^v^v^v^v^v` delivers a bunch of pizzas to some very lucky people at only two houses.
 
@@ -22,48 +20,65 @@
 //! NOW how many houses recieve at least one pizza
 
 //* Approach
-//? Object with conditions, counter for when conditions are met?
-//Starting point is 0 -> delivery
 
+//split input string to array
+//init mariaPosition as array of objects = [{x: 0, y: 0}]
+//init deliveryCounter = 0
+//loop through input arry
+//if i === ^ increment y by 1
+//elseif i === v increment y by -1
+//elseif i === > increment x by 1
+//elseif i === < increment x by -1
+//check to see if object already exists in array
+//if false insert new object into array
+//return count of final num of objects as num of unique houses
 
-//? if previous condition is === opposite of current condition?
-//? But what if third condition brings them back to same house?
-
-//read input
-//mutate to array
-//init delivery counter
-//init house counter 
-//for loop over input
-//if else statement
-//if ^ +1 to house counter & +1 to delivery counter
-//if v -1 to house counter +1 to delivery
-//if > +1 to house counter +1 to delivery
-//if < -1 to house counter +1 to delivery
-//if house counter = 0 do not add to house
+//d > d
+//^   v
+//2d< d
 
 
 const fs = require('fs')
 const input = fs.readFileSync('input.txt', 'utf-8')
 
 const test1 = '^>v<'
+const test2 = '^v^v^v^v^v'
+
 
 function part1 (directions){
-  let arrow = directions.split('')
-  let delivery = 0
-  let houses = 0
-  for (let i = 0; i < arrow.length; i++) {
-    if (arrow[i] === '^'){
-      console.log('north')
-    } else if (arrow[i] === 'v'){
-      console.log('south')
-    } else if (arrow[i] === '>'){
-      console.log('east')
-    } else if (arrow[i] === '<'){
-      console.log('west')
+  let grid = []
+  //console.log('grid array', grid)
+  
+  let mariaPosition = {x: 0, y: 0}
+  //console.log('mariaPosition', mariaPosition)
+  
+  let deliveryCounter = 0
+  //console.log('deliveries', deliveryCounter)
+  
+  let arrowArray = directions.split('')
+  for (let i = 0; i < arrowArray.length; i++) {
+    if(arrowArray[i] === '^'){
+      mariaPosition.y+=1
+    } else if (arrowArray[i] === 'v'){
+      mariaPosition.y-=1
+    } else if (arrowArray[i] === '>'){
+      mariaPosition.x+=1
+    } else {
+      mariaPosition.x-=1
     }
+  console.log('mariaPosition', mariaPosition)
+    if(grid.includes(mariaPosition)){
+      deliveryCounter+=1
+    } else {
+      grid.push(mariaPosition)
+    }
+  console.log('grid', grid)
   }
+  //return grid
 }
 
-part1(test1)
+console.log(part1(test1))
 //part1(input)
+
+
 
