@@ -37,23 +37,21 @@
 //^   v
 //2d< d
 
-
+const lo = require('lodash/lang')
 const fs = require('fs')
 const input = fs.readFileSync('input.txt', 'utf-8')
 
 const test1 = '^>v<'
 const test2 = '^v^v^v^v^v'
+const test3 = '<vvvv<<>>'
 
 
 function part1 (directions){
-  let grid = []
+  let grid = [ {x: 0, y: 0} ]
   //console.log('grid array', grid)
   
-  let mariaPosition = {x: 0, y: 0}
+  let mariaPosition = { x:0, y:0 }
   //console.log('mariaPosition', mariaPosition)
-  
-  let deliveryCounter = 0
-  //console.log('deliveries', deliveryCounter)
   
   let arrowArray = directions.split('')
   for (let i = 0; i < arrowArray.length; i++) {
@@ -66,19 +64,26 @@ function part1 (directions){
     } else {
       mariaPosition.x-=1
     }
-  console.log('mariaPosition', mariaPosition)
-    if(grid.includes(mariaPosition)){
-      deliveryCounter+=1
-    } else {
-      grid.push(mariaPosition)
+    //console.log('mariaPosition', mariaPosition)
+    let alreadyVisited = false
+    for (const house of grid) {
+      if(lo.isEqual(house, mariaPosition)){
+        alreadyVisited = true
+        break
+      }
     }
-  console.log('grid', grid)
+
+    if (!alreadyVisited){
+    grid.push(structuredClone(mariaPosition))
+    }
+    
+    //console.log('grid', grid)
   }
-  //return grid
+  return grid.length
 }
 
-console.log(part1(test1))
-//part1(input)
+//console.log(part1(test3))
+console.log(part1(input))
 
 
 
