@@ -41,6 +41,28 @@ console.log("Part 1:", part1(input))
 
 //* Part 2
 
+function createGird (array, name, grid){
+    if(array === '^'){
+      name.y+=1
+    } else if (array === 'v'){
+      name.y-=1
+    } else if (array === '>'){
+      name.x+=1
+    } else {
+      name.x-=1
+    }
+    let alreadyVisited = false
+    for (const house of grid) {
+      if(lo.isEqual(house, name)){
+        alreadyVisited = true
+        break
+      }
+    }
+    if (!alreadyVisited){
+    grid.push(structuredClone(name))
+    }
+  }
+
 function part2 (directions){
   let grid = [ {x: 0, y: 0} ]
   let mariaPosition = { x:0, y:0 }
@@ -50,46 +72,10 @@ function part2 (directions){
 
   for (let i = 0; i < arrowArray.length; i++) {
     if(deliveryPersonIsMaria){
-      if(arrowArray[i] === '^'){
-        mariaPosition.y+=1
-      } else if (arrowArray[i] === 'v'){
-        mariaPosition.y-=1
-      } else if (arrowArray[i] === '>'){
-        mariaPosition.x+=1
-      } else {
-        mariaPosition.x-=1
-      }
-      let alreadyVisited = false
-      for (const house of grid) {
-        if(lo.isEqual(house, mariaPosition)){
-          alreadyVisited = true
-          break
-        }
-      }
-      if (!alreadyVisited){
-      grid.push(structuredClone(mariaPosition))
-      }
+      createGird(arrowArray[i], mariaPosition, grid)
       deliveryPersonIsMaria = false
     } else if (!deliveryPersonIsMaria){
-      if(arrowArray[i] === '^'){
-        clovisPosition.y+=1
-      } else if (arrowArray[i] === 'v'){
-        clovisPosition.y-=1
-      } else if (arrowArray[i] === '>'){
-        clovisPosition.x+=1
-      } else {
-        clovisPosition.x-=1
-      }
-      let alreadyVisited = false
-      for (const house of grid) {
-        if(lo.isEqual(house, clovisPosition)){
-          alreadyVisited = true
-          break
-        }
-      }
-      if (!alreadyVisited){
-      grid.push(structuredClone(clovisPosition))
-      }
+      createGird(arrowArray[i], clovisPosition, grid)
       deliveryPersonIsMaria = true
     }
   }
