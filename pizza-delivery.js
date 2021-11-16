@@ -2,25 +2,25 @@ const lo = require('lodash/lang')
 const fs = require('fs')
 const input = fs.readFileSync('input.txt', 'utf-8')
 
-function createGird (array, name, grid){
-  if(array === '^'){
-    name.y+=1
-  } else if (array === 'v'){
-    name.y-=1
-  } else if (array === '>'){
-    name.x+=1
+function createGird (arrow, namePosition, grid){
+  if(arrow === '^'){
+    namePosition.y+=1
+  } else if (arrow === 'v'){
+    namePosition.y-=1
+  } else if (arrow === '>'){
+    namePosition.x+=1
   } else {
-    name.x-=1
+    namePosition.x-=1
   }
   let alreadyVisited = false
   for (const house of grid) {
-    if(lo.isEqual(house, name)){
+    if(lo.isEqual(house, namePosition)){
       alreadyVisited = true
       break
     }
   }
   if (!alreadyVisited){
-  grid.push(structuredClone(name))
+  grid.push(structuredClone(namePosition))
   }
 }
 
@@ -29,10 +29,10 @@ function createGird (array, name, grid){
 function part1 (directions){
   let grid = [ {x: 0, y: 0} ]
   let mariaPosition = { x:0, y:0 }
-  let arrowArray = directions.split('')
+  let path = directions.split('')
 
-  for (let i = 0; i < arrowArray.length; i++) {
-    createGird(arrowArray[i], mariaPosition, grid)
+  for (let i = 0; i < path.length; i++) {
+    createGird(path[i], mariaPosition, grid)
   }
   return grid.length
 }
@@ -43,20 +43,19 @@ console.log("Part 1:", part1(input))
 
 //* Part 2
 
-
 function part2 (directions){
   let grid = [ {x: 0, y: 0} ]
   let mariaPosition = { x:0, y:0 }
   let clovisPosition = { x:0, y:0 }
   let deliveryPersonIsMaria = true
-  let arrowArray = directions.split('')
+  let path = directions.split('')
 
-  for (let i = 0; i < arrowArray.length; i++) {
+  for (let i = 0; i < path.length; i++) {
     if(deliveryPersonIsMaria){
-      createGird(arrowArray[i], mariaPosition, grid)
+      createGird(path[i], mariaPosition, grid)
       deliveryPersonIsMaria = false
     } else if (!deliveryPersonIsMaria){
-      createGird(arrowArray[i], clovisPosition, grid)
+      createGird(path[i], clovisPosition, grid)
       deliveryPersonIsMaria = true
     }
   }
