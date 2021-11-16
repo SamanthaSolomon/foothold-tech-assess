@@ -2,7 +2,7 @@ const lo = require('lodash/lang')
 const fs = require('fs')
 const input = fs.readFileSync('input.txt', 'utf-8')
 
-function createGird (arrow, namePosition, grid){
+function createGrid (arrow, namePosition, grid){
   if(arrow === '^'){
     namePosition.y+=1
   } else if (arrow === 'v'){
@@ -32,7 +32,7 @@ function part1 (directions){
   let path = directions.split('')
 
   for (let i = 0; i < path.length; i++) {
-    createGird(path[i], mariaPosition, grid)
+    createGrid(path[i], mariaPosition, grid)
   }
   return grid.length
 }
@@ -52,10 +52,10 @@ function part2 (directions){
 
   for (let i = 0; i < path.length; i++) {
     if(deliveryPersonIsMaria){
-      createGird(path[i], mariaPosition, grid)
+      createGrid(path[i], mariaPosition, grid)
       deliveryPersonIsMaria = false
     } else if (!deliveryPersonIsMaria){
-      createGird(path[i], clovisPosition, grid)
+      createGrid(path[i], clovisPosition, grid)
       deliveryPersonIsMaria = true
     }
   }
@@ -63,9 +63,3 @@ function part2 (directions){
 }
 
 console.log('Part 2:', part2(input))
-
-
-
-
-
-
