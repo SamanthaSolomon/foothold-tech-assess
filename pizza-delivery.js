@@ -34,7 +34,7 @@ function part1 (directions){
   return grid.length
 }
 
-console.log(part1(input))
+console.log("Part 1:", part1(input))
 
 
 
@@ -96,7 +96,7 @@ function part2 (directions){
   return grid.length
 }
 
-console.log(part2(input))
+console.log('Part 2:', part2(input))
 
 
 
