@@ -2,14 +2,14 @@
 
 ### Instructions
 
-Run npm i to install dependendies
+Run `npm i` to install dependendies
 
-Run file to see outputs for Part 1 & Part 2
+Run command `node pizza-delivery.js` to see output.
 
-### Libraries Used
+### Libraries & Frameworks Used
 
- - Node.js
- - Lodash
+ - [Node.js](https://nodejs.org/en/)
+ - [Lodash](https://lodash.com/)
 
 ### Sudo code I started with for Part 1
 ```
